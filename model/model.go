@@ -5,13 +5,15 @@ package model
 import (
 	"context"
 	"database/sql"
+
 	// tom: errors is removed once functions are implemented
 	// "errors"
+	"fmt"
 )
 
 // tom: add backticks to json
 type Post struct {
-	ID      uint64 `json:"id"`
+	ID      int    `json:"id"`
 	Title   string `json:"title"`
 	Content string `json:"content"`
 }
@@ -44,11 +46,11 @@ func (p *Post) CreatePost(ctx context.Context, db *sql.DB) error {
 	if err != nil {
 		return err
 	}
-
+	fmt.Printf("%v\n", p.ID)
 	return nil
 }
 
-func (p *Post) GetAllPosts(ctx context.Context, db *sql.DB, start, count int) ([]Post, error) {
+func GetAllPosts(ctx context.Context, db *sql.DB, start, count int) ([]Post, error) {
 	rows, err := db.QueryContext(ctx,
 		"SELECT id, title,  content FROM posts LIMIT $1 OFFSET $2",
 		count, start)

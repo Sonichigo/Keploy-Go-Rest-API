@@ -1,0 +1,36 @@
+version: api.keploy.io/v1beta2
+kind: Http
+name: test-3
+spec:
+    metadata: {}
+    req:
+        method: GET
+        proto_major: 1
+        proto_minor: 1
+        url: /api/post/3
+        header:
+            Accept: '*/*'
+            Accept-Encoding: gzip, deflate, br
+            Connection: keep-alive
+            Postman-Token: d104576c-fe02-4a67-bc77-def8acc3c790
+            User-Agent: PostmanRuntime/7.32.2
+        body: ""
+        body_type: utf-8
+    resp:
+        status_code: 200
+        header:
+            Content-Type: application/json
+        body: '{"id":3,"title":"A","content":"A"}'
+        body_type: utf-8
+        status_message: ""
+        proto_major: 1
+        proto_minor: 1
+    objects:
+        - type: error
+          data: H4sIAAAAAAAA/wEAAP//AAAAAAAAAAA=
+    mocks:
+        - mock-3-0
+        - mock-3-1
+    assertions:
+        noise: []
+    created: 1686742862

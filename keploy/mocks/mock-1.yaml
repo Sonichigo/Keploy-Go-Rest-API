@@ -1,0 +1,54 @@
+version: api.keploy.io/v1beta2
+kind: SQL
+name: mock-1-0
+spec:
+    metadata:
+        arguments: '[{ 1 10} { 2 0}]'
+        name: SQL
+        operation: QueryContext
+        query: '"SELECT id, title,  content FROM posts LIMIT $1 OFFSET $2"'
+        type: SQL_DB
+    type: error
+    int: 0
+    error:
+        - nil
+---
+version: api.keploy.io/v1beta2
+kind: SQL
+name: mock-1-1
+spec:
+    metadata:
+        name: SQL
+        operation: QueryContext.Close
+        type: SQL_DB
+    type: table
+    table:
+        cols:
+            - name: id
+              type: int64
+              precision: 0
+              scale: 0
+            - name: title
+              type: string
+              precision: 0
+              scale: 0
+            - name: content
+              type: string
+              precision: 0
+              scale: 0
+        rows:
+            - '[`1` | `A` | `A` | ]'
+            - '[`2` | `A` | `A` | ]'
+            - '[`3` | `A` | `A` | ]'
+            - '[`4` | `A` | `A` | ]'
+            - '[`5` | `A` | `A` | ]'
+            - '[`5` | `A` | `A` | ]'
+    int: 0
+    error:
+        - nil
+        - nil
+        - nil
+        - nil
+        - nil
+        - EOF
+        - nil

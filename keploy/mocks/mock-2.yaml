@@ -1,0 +1,36 @@
+version: api.keploy.io/v1beta2
+kind: SQL
+name: mock-2-0
+spec:
+    metadata:
+        arguments: '[{ 1 Name} { 2 Content is ready}]'
+        name: SQL
+        operation: QueryContext
+        query: '"INSERT INTO posts(title, content) VALUES($1, $2) RETURNING id"'
+        type: SQL_DB
+    type: error
+    int: 0
+    error:
+        - nil
+---
+version: api.keploy.io/v1beta2
+kind: SQL
+name: mock-2-1
+spec:
+    metadata:
+        name: SQL
+        operation: QueryContext.Close
+        type: SQL_DB
+    type: table
+    table:
+        cols:
+            - name: id
+              type: int64
+              precision: 0
+              scale: 0
+        rows:
+            - '[`6` | ]'
+    int: 0
+    error:
+        - nil
+        - nil

@@ -17,6 +17,7 @@ import (
 	// tom: go get required
 	"github.com/gorilla/mux"
 	"github.com/lib/pq"
+	"github.com/miracle73/Go-Rest-API/model"
 )
 
 type App struct {
@@ -63,7 +64,7 @@ func (a *App) GetPost(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, http.StatusBadRequest, "Invalid Post ID")
 		return
 	}
-	p := Post{ID: id}
+	p := model.Post{ID: id}
 	if err := p.GetPost(r.Context(), a.DB); err != nil {
 		switch err {
 		case sql.ErrNoRows:
@@ -100,7 +101,7 @@ func (a *App) GetAllPosts(w http.ResponseWriter, r *http.Request) {
 		start = 0
 	}
 
-	Posts, err := GetAllPosts(r.Context(), a.DB, start, count)
+	Posts, err := model.GetAllPosts(r.Context(), a.DB, start, count)
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
@@ -110,7 +111,7 @@ func (a *App) GetAllPosts(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *App) CreatePost(w http.ResponseWriter, r *http.Request) {
-	var p post
+	var p model.Post
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&p); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
@@ -134,7 +135,7 @@ func (a *App) UpdatePost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var p Post
+	var p model.Post
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&p); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid resquest payload")
@@ -159,7 +160,7 @@ func (a *App) DeletePost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	p := Post{ID: id}
+	p := model.Post{ID: id}
 	if err := p.DeletePost(r.Context(), a.DB); err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return

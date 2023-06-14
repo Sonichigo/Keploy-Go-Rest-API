@@ -10,17 +10,17 @@ import (
 	_ "github.com/lib/pq"
 )
 
-// declare a db object, where we can use throughout the model package
+// declare a db object, where we can use throughout t he model package
 // so in blog.go, we have access to this object
 var db *sql.DB
 
 // a struct to hold all the db connection information
 type connection struct {
-	Host string
-	Port string
-	User string
+	Host     string
+	Port     string
+	User     string
 	Password string
-	DBName string
+	DBName   string
 }
 
 func Init() {
@@ -31,12 +31,12 @@ func Init() {
 		return
 	}
 
-	connInfo := connection {
-		Host: os.Getenv("POSTGRES_URL"),
-		Port: os.Getenv("POSTGRES_PORT"),
-		User: os.Getenv("POSTGRES_USER"),
+	connInfo := connection{
+		Host:     os.Getenv("POSTGRES_URL"),
+		Port:     os.Getenv("POSTGRES_PORT"),
+		User:     os.Getenv("POSTGRES_USER"),
 		Password: os.Getenv("POSTGRES_PASSWORD"),
-		DBName: os.Getenv("POSTGRES_DB"),
+		DBName:   os.Getenv("POSTGRES_DB"),
 	}
 
 	// try to open our postgresql connection with our connection info

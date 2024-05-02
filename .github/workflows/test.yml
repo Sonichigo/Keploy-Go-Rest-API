@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: test
-      uses: Sonichigo/go-covreport@v1
+      uses: Sonichigo/go-covreport@main
       with:
         package: ./..
           
